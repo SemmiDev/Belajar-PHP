@@ -1,0 +1,32 @@
+<?php
+
+
+function getConnection()
+{
+    $host = "localhost";
+    $port = "3306";
+    $database = "BELAJAR";
+    $username = "root";
+    $password = "";
+
+    return new PDO("mysql:host=$host:$port;dbname=$database", $username, $password);
+}
+
+$connection = getConnection();
+
+$username = "sammidev";
+$password = $username;
+
+$sql = "SELECT * FROM ADMIN WHERE username = :username AND password = :password";
+$statement = $connection->prepare($sql);
+$statement->bindParam("username", $username);
+$statement->bindParam("password", $password);
+$statement->execute();
+
+if ($row = $statement->fetch()) {
+    echo "LOGIN SUCCESS" . PHP_EOL;
+}else {
+    echo "LOGIN FAILED" . PHP_EOL;
+}
+
+$connection = null;

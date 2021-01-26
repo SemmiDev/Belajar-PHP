@@ -1,0 +1,20 @@
+<?php
+
+function getConnection()
+{
+
+    $host = "localhost";
+    $port = "3306";
+    $database = "BELAJAR";
+    $username = "root";
+    $password = "";
+
+    return new PDO("mysql:host=$host:$port;dbname=$database", $username, $password);
+}
+
+$connection = getConnection();
+$connection->exec("INSERT INTO students (name,nim,email,phone) VALUES ('sam','asdd','adsd','dada')");
+$id = $connection->lastInsertId();
+
+echo $id;
+$connection = null;
